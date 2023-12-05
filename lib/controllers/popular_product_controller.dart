@@ -86,10 +86,13 @@ class PopularProductController extends GetxController {
 
       _cart.items.forEach((key, value) {
         print("the id is : " + value.id.toString() + " The quantity is: " + value.quantity.toString());
+        Get.snackbar("Item add", "Agregado Al carrito!");
+
       });
     } else {
       Get.snackbar("Item count", "No puedes agregar 0 elementos al carro!");
     }
+    update();
   }
 
   int get totalItems {

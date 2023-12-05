@@ -1,11 +1,9 @@
 import 'package:ecommerce_app/models/cart_model.dart';
 import 'package:ecommerce_app/models/product.dart';
-import 'package:ecommerce_app/service/repository/cart_repo.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  final CartRepo cartRepo;
-  CartController({required this.cartRepo});
+  CartController();
 
   Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;  
@@ -21,6 +19,7 @@ class CartController extends GetxController {
           quantity: value.quantity! + quantity,
           isExist: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
     } else {
@@ -35,9 +34,12 @@ class CartController extends GetxController {
           quantity: quantity,
           isExist: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
     }
+
+    update();
   }
 
   bool existInCart(ProductModel product) {
@@ -72,4 +74,13 @@ class CartController extends GetxController {
       return e.value;
     }).toList();
   }
+
+  int get totalAmount {
+    var total = 0;
+    _items.forEach((key, value) {
+      total += value.quantity! * value.price!;
+    });
+    return total;
+  }
+
 }

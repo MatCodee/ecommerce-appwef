@@ -2,6 +2,7 @@ import 'package:ecommerce_app/controllers/cart_controller.dart';
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
 import 'package:ecommerce_app/pages/cart/cart_page.dart';
 import 'package:ecommerce_app/pages/home/main_food_page.dart';
+import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
 import 'package:ecommerce_app/utils/dinemsion_page.dart';
@@ -58,7 +59,7 @@ class PopularFoodDetail extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const CartPage());
+                    Get.toNamed(RouterHelper.getCartPage());
                   },
                   child: const AppIcon(icon: Icons.shopping_cart_outlined)
                 ),
@@ -150,7 +151,7 @@ class PopularFoodDetail extends StatelessWidget {
       ),
       bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct) {
         return Container(
-        height: 120,
+        height: 130,
         padding: EdgeInsets.only(
           top: Dimension.height30,
           bottom: Dimension.height30,
@@ -222,7 +223,8 @@ class PopularFoodDetail extends StatelessWidget {
           ],
         ),
       );
-      })
+      }
+      )
       
     );
   }
