@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/controllers/cart_controller.dart';
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
+import 'package:ecommerce_app/pages/cart/cart_page.dart';
 import 'package:ecommerce_app/pages/home/main_food_page.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
@@ -55,7 +56,12 @@ class PopularFoodDetail extends StatelessWidget {
                   },
                   child: const AppIcon(icon: Icons.arrow_back_ios)
                 ),
-                const AppIcon(icon: Icons.shopping_cart_outlined),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const CartPage());
+                  },
+                  child: const AppIcon(icon: Icons.shopping_cart_outlined)
+                ),
               ],
             ),
           ),

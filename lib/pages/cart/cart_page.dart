@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/pages/home/main_food_page.dart';
+import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
 import 'package:ecommerce_app/utils/dinemsion_page.dart';
 import 'package:ecommerce_app/widgets/app_icon.dart';
@@ -5,6 +7,7 @@ import 'package:ecommerce_app/widgets/big_text.dart';
 import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -21,20 +24,27 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(
-                  icon: Icons.arrow_back_ios,
-                  iconColor: Colors.white,
-                  backgroundColor: AppColors.mainColor,
+                GestureDetector(
+                  onTap: () {
+                    print("Volver a la otra");
+                  //Get.toNamed(RouterHelper.getRecommendedFood(index));
+                  Get.to(() => const  MainFoodPage());
+                  },
+                  child: const AppIcon(
+                    icon: Icons.arrow_back_ios,
+                    iconColor: Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                  ),
                 ),
                 SizedBox(
                   width: Dimension.width20 * 5,
                 ),
-                AppIcon(
+                const AppIcon(
                   icon: Icons.home_outlined,
                   iconColor: Colors.white,
                   backgroundColor: AppColors.mainColor,
                 ),
-                AppIcon(
+                const AppIcon(
                   icon: Icons.shopping_cart,
                   iconColor: Colors.white,
                   backgroundColor: AppColors.mainColor,
