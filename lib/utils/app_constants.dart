@@ -9,6 +9,9 @@ class AppContants {
   //static const String BASE_URL = "http://192.168.239.243:8000";
 
 
+  // AUTH:
+  static const String REGISTRATION_URL = "/api/v1/auth/register";
+  static const String LOGIN_URL = "/api/v1/auth/login";
   //static const String FOOD_URL = "/api/foods/1";
 
 
