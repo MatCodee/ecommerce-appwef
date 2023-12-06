@@ -1,5 +1,3 @@
-
-
 import 'package:ecommerce_app/models/auth_model.dart';
 import 'package:ecommerce_app/models/response_model.dart';
 import 'package:ecommerce_app/service/repository/auth_repo.dart';
@@ -29,5 +27,29 @@ class AuthController extends GetxController implements GetxService {
     update();
     return responseModel;
   }
+
+  Future<ResponseModel> login(String email, String password) async {
+    //print(authRepo.getUserToken().toString());
+      
+    _isLoading = true;
+    Response response = await authRepo.login(email,password);
+    late ResponseModel responseModel;
+    if (response.statusCode == 200) {
+      authRepo.saveUserToken(response.body["token"]);
+      responseModel = ResponseModel(true,response.body["token"]);
+    } else {
+      responseModel = ResponseModel(false,response.statusText!);
+    }
+    _isLoading = true;
+    update();
+    return responseModel;
+  }
+
+  void saveUserNumberAndPassword(String number, String password) {
+    authRepo.saveUserNumberAndPassword(number, password);
+  }
+
+
+
 
 }

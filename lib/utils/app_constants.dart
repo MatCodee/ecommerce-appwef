@@ -17,6 +17,11 @@ class AppContants {
 
   static const String POPULAR_PRODUCT_URI = "/api/v1/products/popular";
   static const String RECOMENDED_PRODUCT_URI = "/api/v1/products/recommended";
+
+
   static const String TOKEN = "DBtoken";
+  static const String PHONE = "";
+  static const String PASSWORD = "";
+
 
 }

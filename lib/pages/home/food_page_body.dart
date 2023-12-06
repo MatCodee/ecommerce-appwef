@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
 import 'package:ecommerce_app/controllers/recomended_product_controller.dart';
 import 'package:ecommerce_app/models/product.dart';
-import 'package:ecommerce_app/pages/detail/popular_food_detail.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';

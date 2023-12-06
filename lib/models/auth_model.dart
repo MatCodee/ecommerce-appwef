@@ -22,3 +22,4 @@ class SignUpBody {
     return data;
   }
 }
+

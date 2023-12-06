@@ -1,12 +1,6 @@
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
 import 'package:ecommerce_app/controllers/recomended_product_controller.dart';
-import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/pages/account/account_page.dart';
-import 'package:ecommerce_app/pages/auth/sign_in_page.dart';
-import 'package:ecommerce_app/pages/auth/sign_up_page.dart';
-import 'package:ecommerce_app/pages/cart/cart_page.dart';
-import 'package:ecommerce_app/pages/detail/popular_food_detail.dart';
-import 'package:ecommerce_app/pages/home/main_food_page.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +8,7 @@ import 'helpers/dependences.dart' as dep;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  dep.init();
+  await dep.init();
   runApp(const MyApp());
 }
 
@@ -29,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home:  SignUpPage(),
+      home:  const AccountPage(),
       initialRoute: RouterHelper.initial,
       getPages:   RouterHelper.routes,
     );

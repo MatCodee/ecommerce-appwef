@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/controllers/cart_controller.dart';
-import 'package:ecommerce_app/pages/home/main_food_page.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
@@ -8,7 +7,6 @@ import 'package:ecommerce_app/widgets/app_icon.dart';
 import 'package:ecommerce_app/widgets/big_text.dart';
 import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
