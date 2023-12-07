@@ -23,7 +23,7 @@ Future<void> init() async {
   Get.lazyPut(() => AuthRepo(apiclient: Get.find(), sharedPreferences: Get.find<SharedPreferences>()));
   Get.lazyPut(() => PopularProductRepo(apiclient: Get.find()));
   Get.lazyPut(() => RecomendedProductRepo(apiclient: Get.find()));
-  Get.lazyPut(() => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(() => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find<SharedPreferences>()));
 
   // controllers
   Get.lazyPut(() => AuthController(authRepo: Get.find()));

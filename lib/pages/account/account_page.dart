@@ -15,7 +15,8 @@ class AccountPage extends StatelessWidget {
         backgroundColor: AppColors.mainColor,
         title: const Text("Profile"),
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Container(
           margin: EdgeInsets.only(top: Dimension.height20),
