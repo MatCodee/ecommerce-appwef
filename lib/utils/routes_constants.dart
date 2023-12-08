@@ -2,7 +2,7 @@
 class RoutesConstants {
   
   // common
-  static const String baseUrl = "http://192.168.1.36:8000";
+  static const String baseUrl = "http://192.168.1.34:8000";
 
   // Auth
   static const String authUser = '/api/v1/auth/users/';
