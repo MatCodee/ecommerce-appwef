@@ -40,6 +40,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   void dispose() {
     pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -143,7 +144,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         color: Colors.white38,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(AppContants.BASE_URL + "/uploads/" +  recomendedProduct.recomendedProductsList[index]!.img),
+                          image: NetworkImage(recomendedProduct.recomendedProductsList[index]!.img),
                       ),
                       ),
                     ),
@@ -251,7 +252,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     : const Color(0xFF9294CC),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(AppContants.BASE_URL + "/uploads/" +  popularProduct.img!),
+                  image: NetworkImage(popularProduct.img!),
                 ),
               ),
             ),

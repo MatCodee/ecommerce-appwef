@@ -26,7 +26,8 @@ class CartPage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouterHelper.getInitial());
+                    //Get.toNamed(RouterHelper.getInitial());
+                    Get.back();
                   },
                   child: const AppIcon(
                     icon: Icons.arrow_back_ios,
@@ -84,7 +85,7 @@ class CartPage extends StatelessWidget {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     //image: AssetImage("assets/imagen.png")),
-                                    image: NetworkImage(AppContants.BASE_URL + '/uploads/' + cartList[index].img!),
+                                    image: NetworkImage(cartList[index].img!),
                                 ),
                                 borderRadius: BorderRadius.circular(Dimension.radius20),
                                 color: Colors.white,

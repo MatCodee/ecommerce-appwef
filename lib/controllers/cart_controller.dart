@@ -3,7 +3,6 @@ import 'package:ecommerce_app/models/product.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  CartController();
 
   Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;  

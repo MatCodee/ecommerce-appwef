@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/controllers/cart_controller.dart';
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
+import 'package:ecommerce_app/pages/home/home_page.dart';
 import 'package:ecommerce_app/pages/home/main_food_page.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
@@ -37,7 +38,7 @@ class PopularFoodDetail extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(AppContants.BASE_URL + "/uploads/" + product.img!)
+                  image: NetworkImage(product.img!)
                 )
               ),
             )
@@ -52,7 +53,7 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const  MainFoodPage());
+                    Get.to(() => const  HomePage());
                   },
                   child: const AppIcon(icon: Icons.arrow_back_ios)
                 ),

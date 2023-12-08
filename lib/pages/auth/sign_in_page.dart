@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/base/show_custom_message.dart';
 import 'package:ecommerce_app/controllers/auth_controlller.dart';
 import 'package:ecommerce_app/pages/auth/sign_up_page.dart';
+import 'package:ecommerce_app/pages/home/main_food_page.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
 import 'package:ecommerce_app/utils/dinemsion_page.dart';
@@ -16,7 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
-  var emailController = TextEditingController();
+  var usernameController = TextEditingController();
   var passwordController = TextEditingController();
 
   @override
@@ -60,7 +61,7 @@ class SignInPage extends StatelessWidget {
               height: Dimension.height20,
             ),
             InputFieldText(
-                textController: emailController,
+                textController: usernameController,
                 hintText: "Email",
                 icon: Icons.email),
             SizedBox(
@@ -75,7 +76,7 @@ class SignInPage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                //_login(authController);
+                _login(authController);
               },
               child: Container(
                 width: Dimension.screenWidth / 2,
@@ -110,26 +111,25 @@ class SignInPage extends StatelessWidget {
   }
 
   void _login(AuthController authController) {
-    String email = emailController.text.trim();
+    String username = usernameController.text.trim();
     String password = passwordController.text.trim();
 
-    if (email.isEmpty) {
+    if (username.isEmpty) {
       showCustomSnackBar("Type your email", title: "Email Address");
-    } else if (GetUtils.isEmail(email)) {
-      showCustomSnackBar("Type in a valid email address",
-          title: "Valid Email Address");
-    } else if (password.isEmpty) {
+    }  else if (password.isEmpty) {
       showCustomSnackBar("Type your password", title: "Password");
     } else if (password.length < 6) {
       showCustomSnackBar("Password can not be less than six characters",
           title: "Password");
     } else {
-      showCustomSnackBar("Perfect", title: "Perfect");
+      showCustomSnackBar("Perfect",isError: false, title: "Perfect");
 
-      authController.login(email, password).then((status) {
+      authController.login(username, password).then((status) {
         if (status.isSuccess) {
           print("Success Login");
-          Get.toNamed(RouterHelper.getInitial());
+          //Get.toNamed(RouterHelper.getInitial());
+          //Get.to(MainFoodPage());
+          Get.toNamed(RouterHelper.home);
         } else {
           showCustomSnackBar(status.message);
         }

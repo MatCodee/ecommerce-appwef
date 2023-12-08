@@ -12,19 +12,19 @@ class ApiClient extends GetConnect implements GetxService {
     token = AppContants.TOKEN;
     _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $token',
     };
   }
-  void updateHeader(String token) {
+  void updateHeader(String new_token) {
     _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $new_token',
     };
   }
 
   Future<Response> getData(String url) async {
     try {
-      Response response = await get(url);
+      Response response = await get(url,headers: !token.isEmail ? _mainHeaders : {});
       return response;
     } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());

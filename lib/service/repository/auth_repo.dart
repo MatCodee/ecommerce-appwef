@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/auth_model.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
+import 'package:ecommerce_app/utils/routes_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ecommerce_app/service/api/api_client.dart';
@@ -11,17 +12,18 @@ class AuthRepo {
   AuthRepo({required this.apiclient,required this.sharedPreferences});
 
   
-  
+  //AppContants.REGISTRATION_URL
   Future<Response> registration(SignUpBody signUpBody) async {
-    return await apiclient.postData(AppContants.REGISTRATION_URL, signUpBody.toJson());
+    print(signUpBody.toJson());
+    return await apiclient.postData(RoutesConstants.authUser, signUpBody.toJson());
   }
 
-  Future<Response> login(String email,String password) async {
+  Future<Response> login(String username,String password) async {
     var form = {
-      "email": email,
+      "username": username,
       "password": password
     };
-    return await apiclient.postData(AppContants.LOGIN_URL, form );
+    return await apiclient.postData(RoutesConstants.authToken, form );
   }
 
 

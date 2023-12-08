@@ -78,4 +78,5 @@ class ProductModel {
     data['type_id'] = this.typeId;
     return data;
   }
+
 }

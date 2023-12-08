@@ -22,7 +22,7 @@ class AppContants {
   static const String RECOMENDED_PRODUCT_URI = "/api/v1/products/recommended";
 
 
-  static const String TOKEN = "DBtoken";
+  static const String TOKEN = "38f82fb89ef1d9b69407886aed7b282201cafbee";
   static const String PHONE = "";
   static const String PASSWORD = "";
 
