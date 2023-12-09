@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/controllers/cart_controller.dart';
+import 'package:ecommerce_app/pages/payment/paypal_payment_page.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
@@ -223,6 +224,7 @@ class CartPage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     //popularProduct.addItem(product);
+                    Get.to(PaymentPage());
                   },
                   child: BigText(text: "\$ Check",color: Colors.white,)
                 ),

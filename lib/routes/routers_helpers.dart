@@ -3,6 +3,7 @@ import 'package:ecommerce_app/pages/cart/cart_page.dart';
 import 'package:ecommerce_app/pages/detail/popular_food_detail.dart';
 import 'package:ecommerce_app/pages/home/home_page.dart';
 import 'package:ecommerce_app/pages/home/main_food_page.dart';
+import 'package:ecommerce_app/pages/payment/paypal_payment_page.dart';
 import 'package:get/get.dart';
 
 class RouterHelper {
