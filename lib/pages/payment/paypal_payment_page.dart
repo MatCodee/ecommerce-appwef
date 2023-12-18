@@ -89,7 +89,10 @@ class _PaymentPageState extends State<PaymentPage> {
                       ),
                     )
                   },
-              child: const Text("Make Payment")),
+              child: Container(
+                child: const Text("Make Payment")),
+                
+              ),
         ));
   }
 

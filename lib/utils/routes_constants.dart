@@ -13,6 +13,11 @@ class RoutesConstants {
   static const String productDetail = '/api/v1/products';
   // Payments:
 
+
+  // TODO: Implementar estas url en el backend:
+  // Address:
+  static const String AddUserAddress = '/api/v1/customer/address/add';
+  static const String AddressList = '';
   // Orders:
 
 

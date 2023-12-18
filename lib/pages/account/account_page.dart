@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/controllers/user_controller.dart';
+import 'package:ecommerce_app/pages/address/add_address_page.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
 import 'package:ecommerce_app/utils/dinemsion_page.dart';
 import 'package:ecommerce_app/widgets/account_widget.dart';
@@ -59,13 +60,18 @@ class AccountPage extends StatelessWidget {
                         bigText:
                             BigText(text: userController.userModel.email)),
                     SizedBox(height: Dimension.height20),
-                    AccountWidget(
-                        appIcon: const AppIcon(
-                          icon: Icons.location_city,
-                          backgroundColor: AppColors.yellowColor,
-                          iconColor: Colors.white,
-                        ),
-                        bigText: BigText(text: userController.userModel.address)),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => AddressPage());
+                      },
+                      child: AccountWidget(
+                          appIcon: const AppIcon(
+                            icon: Icons.location_city,
+                            backgroundColor: AppColors.yellowColor,
+                            iconColor: Colors.white,
+                          ),
+                          bigText: BigText(text: userController.userModel.address)),
+                    ),
                     SizedBox(height: Dimension.height20),
                     AccountWidget(
                         appIcon: const AppIcon(
