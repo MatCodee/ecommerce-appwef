@@ -33,6 +33,8 @@ class LocationController extends GetxController implements GetxService {
   late Map<String, dynamic> _getAddress;
 
   late GoogleMapController _mapController;
+
+
   bool _updateAddressData = true;
   bool _changeAddress = true;
 
@@ -160,6 +162,7 @@ class LocationController extends GetxController implements GetxService {
   List<String> get addressTypeList => _addressTypeList;
   int get addressTypeIndex => _addressTypeIndex;
   List<AddressModel> get allAddressList => _allAddressList;
+  GoogleMapController get mapController => _mapController;
 
 
   void setAddressTypeIndex(int index) {

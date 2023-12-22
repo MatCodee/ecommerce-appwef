@@ -1,12 +1,5 @@
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
 import 'package:ecommerce_app/controllers/recomended_product_controller.dart';
-import 'package:ecommerce_app/controllers/user_controller.dart';
-import 'package:ecommerce_app/models/auth_model.dart';
-import 'package:ecommerce_app/pages/account/account_page.dart';
-import 'package:ecommerce_app/pages/address/add_address_page.dart';
-import 'package:ecommerce_app/pages/auth/sign_in_page.dart';
-import 'package:ecommerce_app/pages/auth/sign_up_page.dart';
-import 'package:ecommerce_app/pages/home/main_food_page.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

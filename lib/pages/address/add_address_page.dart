@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/controllers/location_controller.dart';
 import 'package:ecommerce_app/controllers/user_controller.dart';
 import 'package:ecommerce_app/models/address_model.dart';
+import 'package:ecommerce_app/pages/address/pick_address_map.dart';
+import 'package:ecommerce_app/routes/routers_helpers.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
 import 'package:ecommerce_app/utils/dinemsion_page.dart';
 import 'package:ecommerce_app/widgets/big_text.dart';
@@ -90,7 +92,7 @@ class _AddressPageState extends State<AddressPage> {
                       children: [
                         GoogleMap(
                             initialCameraPosition: CameraPosition(
-                                target: _initialPosition, zoom: 17),
+                            target: _initialPosition, zoom: 17),
                             zoomControlsEnabled: false,
                             compassEnabled: false,
                             indoorViewEnabled: true,
@@ -98,6 +100,14 @@ class _AddressPageState extends State<AddressPage> {
                             onCameraIdle: () {
                               locationController.updatePosition(
                                   _cameraPosition, true);
+                            },
+                            onTap: (latLng) {
+                              Get.toNamed(RouterHelper.getPickAddressPage(),
+                              arguments: PickAddressPage(
+                                fromAdress: true,
+                                fromSignup: false,
+                                googleMapController: locationController.mapController,
+                              ));
                             },
                             onCameraMove: ((position) =>
                                 _cameraPosition = position),
