@@ -19,6 +19,7 @@ class LocationController extends GetxController implements GetxService {
   // Esta es la posicion del controlador
   late Position _position;
   late Position _pickPosition;
+  late Position _currentPosition;
 
   Placemark _placemark = Placemark();
   Placemark _pickPlacemark = Placemark();
@@ -26,20 +27,47 @@ class LocationController extends GetxController implements GetxService {
   List<AddressModel> _addressList = [];
 
   late List<AddressModel> _allAddressList;
+
+
+  // tipos de direcciones 
   List<String> _addressTypeList = ["home","office","others"];
 
   int _addressTypeIndex = 0;
 
   late Map<String, dynamic> _getAddress;
-
   late GoogleMapController _mapController;
 
 
   bool _updateAddressData = true;
   bool _changeAddress = true;
 
+  
 
+  Future<void> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      throw Exception('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        throw Exception('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      throw Exception(
+        'Location permissions are permanently denied, we cannot request permissions.');
+    } 
+    _currentPosition = await Geolocator.getCurrentPosition();
+    print("guardado la Posision");
+    print(_currentPosition);
+  }
 
 
   void updatePosition(CameraPosition position, bool fromAddress) async {
@@ -85,6 +113,8 @@ class LocationController extends GetxController implements GetxService {
       } catch (e) {
         print(e);
       }
+      _loading = false;
+      update();
     }
   }
 
@@ -103,7 +133,6 @@ class LocationController extends GetxController implements GetxService {
 
 
   // Set Address Tupe index
-
   Future<ResponseModel> addAddress(AddressModel addressModel) async {
     _loading = true;
     update();
@@ -121,23 +150,33 @@ class LocationController extends GetxController implements GetxService {
     return responseModel;
   }
 
+
+  // Devolver la lista de direcciones
   Future<void> getAddressList() async {
     Response response = await locationRepo.getAllAddress();
     if(response.statusCode == 200) {
       _addressList = [];
       _allAddressList = [];
-      response.body.forEach((address) {
-        _addressList.add(AddressModel.fromJson(address));
-        _allAddressList.add(AddressModel.fromJson(address));
-      });
+      print('Tuvo exito al entrar');
+      
+      final data = response.body;
+      _addressList.add(AddressModel.fromJson(data));
+      _allAddressList.add(AddressModel.fromJson(data));
+      _getAddress = AddressModel.fromJson(data).toJson();
+
+      // response.body.forEach((address) {
+      //   _addressList.add(AddressModel.fromJson(address));
+      //   _allAddressList.add(AddressModel.fromJson(address));
+      // });
     } else {
+      print("NO entro");
       _addressList = [];
       _allAddressList = [];
     }
     update();
   }
 
-
+  // Trae al informaciond de address desde el shared Preference
   AddressModel getUserAddress() {
     late AddressModel _addressModel;
     _getAddress = jsonDecode(locationRepo.getUserAddress());
@@ -156,6 +195,7 @@ class LocationController extends GetxController implements GetxService {
   Placemark get pickPlacemark => _pickPlacemark;
 
   Position get position => _position;
+  Position get currentPosition => _currentPosition;
 
   Map get getAddress => _getAddress;
   List<AddressModel> get addressList => _addressList;
@@ -163,7 +203,11 @@ class LocationController extends GetxController implements GetxService {
   int get addressTypeIndex => _addressTypeIndex;
   List<AddressModel> get allAddressList => _allAddressList;
   GoogleMapController get mapController => _mapController;
+  bool get loading => _loading;
 
+
+
+  // set methods
 
   void setAddressTypeIndex(int index) {
     _addressTypeIndex = index;

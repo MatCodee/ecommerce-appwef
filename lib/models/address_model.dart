@@ -1,5 +1,6 @@
 class AddressModel {
   late int? _id;
+  late int _userid;
   late String _addressType;
   late String? _contactPersonName;
   late String? _contactPersonNumber;
@@ -9,6 +10,7 @@ class AddressModel {
 
   AddressModel({
       id,
+      required userid,
       required addressType,
       contactPersonName,
       contactPersonNumber,
@@ -22,8 +24,11 @@ class AddressModel {
     _address = address;
     _latitude = latitude;
     _longitude = longitude;
+    _userid = userid;
   }
 
+
+  int get userid => _userid;
   String get address => _address;
   String get addressType => _addressType;
   String? get contactPersonName => _contactPersonName;
@@ -40,6 +45,7 @@ class AddressModel {
     _address = json['address'];
     _latitude = json['latitude'];
     _longitude = json['longitude'];
+    _userid = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +57,7 @@ class AddressModel {
     data['longitude'] = _longitude;
     data['address'] = _address;
     data['latitude'] = _latitude;
+    data['user_id'] = _userid;
     return data;
   }
 

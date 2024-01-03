@@ -1,7 +1,5 @@
+import 'dart:async';
 import 'package:ecommerce_app/controllers/location_controller.dart';
-import 'package:ecommerce_app/utils/color_custom.dart';
-import 'package:ecommerce_app/utils/dinemsion_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,27 +20,17 @@ class PickAddressPage extends StatefulWidget {
 }
 
 class _PickAddressPageState extends State<PickAddressPage> {
-  late LatLng _initialPosition;
+  LocationController locationController = Get.find<LocationController>();
+  final LatLng _initialPosition = const LatLng(45.51563, -122.677433);
+  final CameraPosition _cameraPosition =
+      const CameraPosition(target: LatLng(45.51563, -122.677433), zoom: 17);
   late GoogleMapController _mapController;
-  late CameraPosition _cameraPosition;
+  LatLng sourceLocation = LatLng(
+      Get.find<LocationController>().currentPosition.latitude,
+      Get.find<LocationController>().currentPosition.longitude);
 
-  @override
-  void initState() {
-    // TODO: Implement initState
-    super.initState();
-    if (Get.find<LocationController>().addressList.isEmpty) {
-      _initialPosition = const LatLng(45.521563, -122.677433);
-      _cameraPosition = CameraPosition(target: _initialPosition, zoom: 17);
-    } else {
-      if (Get.find<LocationController>().addressList.isNotEmpty) {
-        _initialPosition = LatLng(
-          double.parse(Get.find<LocationController>().getAddress['latitude']),
-          double.parse(Get.find<LocationController>().getAddress['longitude']),
-        );
-        _cameraPosition = CameraPosition(target: _initialPosition, zoom: 17);
-      }
-    }
-  }
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,58 +43,27 @@ class _PickAddressPageState extends State<PickAddressPage> {
               child: Stack(
                 children: [
                   GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: _initialPosition,
-                      zoom: 17,
-                    ),
-                    zoomControlsEnabled: false,
-                    onCameraMove: (CameraPosition cameraPosition) {
-                      _cameraPosition = cameraPosition;
-                    },
-                    onCameraIdle: () {
-                      Get.find<LocationController>()
-                          .updatePosition(_cameraPosition, false);
-                    },
+                    initialCameraPosition:
+                        CameraPosition(target: sourceLocation, zoom: 17.5),
+                    mapType: MapType.terrain,
+                    onMapCreated: ((GoogleMapController controller) {
+                      _controller.complete(controller);
+                    }),
                   ),
-                  Positioned(
-                    top: Dimension.height45,
-                    left: Dimension.width20,
-                    right: Dimension.width20,
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Dimension.width10),
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: AppColors.mainColor,
-                        borderRadius:
-                            BorderRadius.circular(Dimension.radius20 / 2),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on,
-                            size: 25,
-                            color: AppColors.yellowColor,
-                          ),
-                          // Mostrar la direccionaqui
-                          Expanded(
-                            child: Text(
-                              locationController.pickPlacemark.name ?? "",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Dimension.font16),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  Center(
+                      child: !locationController.loading
+                          ? Image.asset('assets/location.png',
+                              height: 50, width: 50)
+                          : const CircularProgressIndicator()),
                 ],
               ),
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          label: const Text('Guardar Ubicacion!'),
+          icon: const Icon(Icons.directions_boat),
         ),
       );
     });

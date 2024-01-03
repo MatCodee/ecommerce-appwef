@@ -10,7 +10,6 @@ import 'package:ecommerce_app/service/repository/location_repo.dart';
 import 'package:ecommerce_app/service/repository/popular_products_repo.dart';
 import 'package:ecommerce_app/service/repository/recomended_products_repo.dart';
 import 'package:ecommerce_app/service/repository/user_repo.dart';
-import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/routes_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -116,8 +116,6 @@ class CartPage extends StatelessWidget {
                                         ),
                                         Container(
                                           padding: EdgeInsets.only(
-                                              top: Dimension.height10,
-                                              bottom: Dimension.height10,
                                               left: Dimension.width20,
                                               right: Dimension.width20),
                                           decoration: BoxDecoration(

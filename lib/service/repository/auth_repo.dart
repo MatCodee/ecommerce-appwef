@@ -19,11 +19,15 @@ class AuthRepo {
   }
 
   Future<Response> login(String username,String password) async {
-    var form = {
+    Map<String, dynamic> form = {
       "username": username,
       "password": password
     };
-    return await apiclient.postData(RoutesConstants.authToken, form );
+    return await apiclient.postDataAuth(RoutesConstants.authToken, form);
+  }
+
+  Future<Response> logout() async {
+    return await apiclient.postData(RoutesConstants.logout, null);
   }
 
 
@@ -36,6 +40,14 @@ class AuthRepo {
     }
   }
 
+  Future<Response> isAuthUser() async {
+    final userToken = await getUserToken();
+    if (userToken.isNotEmpty) {
+      //apiclient.updateHeader(userToken);
+    }
+    Response response = await apiclient.getData(RoutesConstants.isAutenticated);
+    return response;
+  }
 
   Future<String> getUserToken() async {
     return await sharedPreferences.getString(AppContants.TOKEN) ?? "None";
@@ -43,7 +55,7 @@ class AuthRepo {
 
 
   saveUserToken(String token) async {
-    apiclient.token = token;
+    //apiclient.token = token;
     apiclient.updateHeader(token);
     return await sharedPreferences.setString(AppContants.TOKEN, token);
   }

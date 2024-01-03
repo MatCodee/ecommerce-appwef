@@ -1,7 +1,4 @@
 
-
-import 'dart:convert';
-
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/service/repository/recomended_products_repo.dart';
 import 'package:get/get.dart';
@@ -21,9 +18,7 @@ class RecomendedProductController extends GetxController {
     Response response = await recomendedProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
       _recomendedProductsList = [];
-      
-
-      print(response.body);
+    
       //_recomendedProductsList.addAll(Product.fromJson(response.body).products);
 
       dynamic productsData = response.body;

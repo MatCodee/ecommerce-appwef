@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class ApiClient extends GetConnect implements GetxService {
@@ -9,13 +8,13 @@ class ApiClient extends GetConnect implements GetxService {
   ApiClient({ required this.appBaseUrl}) {
     baseUrl = appBaseUrl;
     timeout = const Duration(seconds: 30);
-    token = AppContants.TOKEN;
+    token = "";
     _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
-      'Authorization': 'Token $token',
     };
   }
   void updateHeader(String new_token) {
+    token = new_token;
     _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
       'Authorization': 'Token $new_token',
@@ -24,7 +23,7 @@ class ApiClient extends GetConnect implements GetxService {
 
   Future<Response> getData(String url) async {
     try {
-      Response response = await get(url,headers: !token.isEmail ? _mainHeaders : {});
+      Response response = await get(url,headers: _mainHeaders );
       return response;
     } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());
@@ -39,6 +38,14 @@ class ApiClient extends GetConnect implements GetxService {
       print(e.toString());
       return Response(statusCode: 1,statusText: e.toString());
     }
-
+  }
+  Future<Response> postDataAuth(String url, dynamic body) async {
+    try {
+      Response response = await post(url, body);
+      return response;
+    } catch (e) {
+      print(e.toString());
+      return Response(statusCode: 1,statusText: e.toString());
+    }
   }
 }

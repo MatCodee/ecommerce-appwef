@@ -1,5 +1,6 @@
 
 
+import 'package:ecommerce_app/controllers/location_controller.dart';
 import 'package:ecommerce_app/controllers/user_controller.dart';
 import 'package:ecommerce_app/pages/account/account_page.dart';
 import 'package:ecommerce_app/pages/cart/cart_page.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Get.find<UserController>().getUserInfo();
+    Get.find<LocationController>().getAddressList();
 
     return Scaffold(
       body: pages[_selectedIndex],

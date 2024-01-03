@@ -32,7 +32,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     pageController.addListener(() {
       setState(() {
         _currPageValue = pageController.page!;
-        print("Current value is " + _currPageValue.toString());
+        //print("Current value is " + _currPageValue.toString());
       });
     });
   }
@@ -237,7 +237,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           GestureDetector(
             onTap: () {
-              print(index);
+              //print(index);
               //Get.toNamed(RouterHelper.getPopularFood(index));
               Get.toNamed(RouterHelper.getPopularFood(index));
             },
@@ -310,7 +310,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ],
                     ),
                     SizedBox(
-                      height: Dimension.height20,
+                      height: Dimension.height10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

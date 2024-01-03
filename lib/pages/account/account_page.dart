@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controllers/location_controller.dart';
 import 'package:ecommerce_app/controllers/user_controller.dart';
 import 'package:ecommerce_app/pages/address/add_address_page.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
@@ -13,6 +14,9 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      Get.find<LocationController>().determinePosition();
+
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.mainColor,

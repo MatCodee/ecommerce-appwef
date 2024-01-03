@@ -17,6 +17,7 @@ class RouterHelper {
   static const String pickAddressMap = "/pick-address";
 
 
+
   static String getInitial() => '$initial';
   static String getPopularFood(int pageId) => '$popularFood?pageId=$pageId';
   static String getRecommendedFood(int pageId) =>'$recommendedFood?pageId=$pageId';
@@ -24,13 +25,13 @@ class RouterHelper {
   static String getHomePage() => '$home';
   static String getPickAddressPage() => '$pickAddressMap';
 
-
   static List<GetPage> routes = [
     GetPage(name: pickAddressMap, page: () {
       PickAddressPage _pickAddress = Get.arguments;
       return _pickAddress;
     }),
-    GetPage(name: "/", page: () => SignInPage()),
+    GetPage(name: initial, page: () => SignInPage()),
+    
     GetPage(
         name: popularFood,
         page: () {

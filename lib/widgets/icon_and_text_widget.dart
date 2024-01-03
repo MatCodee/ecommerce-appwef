@@ -7,7 +7,7 @@ class IconAndTextWidget extends StatelessWidget {
   final IconData? icon;
   final String? text;
   final Color? iconColor; 
-
+  
   IconAndTextWidget({super.key,required this.icon,required this.iconColor,required this.text});
 
 
@@ -17,7 +17,7 @@ class IconAndTextWidget extends StatelessWidget {
       children: [
         Icon(icon,color: iconColor,size: Dimension.iconSize24,),
         const SizedBox(width: 5,),
-        Text(text!),
+        Text(text!, style: const TextStyle(fontSize: 12),),
       ],
     );
   }

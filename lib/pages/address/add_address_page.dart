@@ -20,63 +20,75 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
+  
+  
   TextEditingController _addressscontroller = TextEditingController();
   final TextEditingController _contactPersonName = TextEditingController();
   final TextEditingController _contactPersonNumber = TextEditingController();
-  late bool _isLogged;
-  CameraPosition _cameraPosition =
-      CameraPosition(target: LatLng(45.51563, -122.677433), zoom: 17);
-  LatLng _initialPosition = LatLng(45.51563, -122.677433);
+  
+  
+  CameraPosition _cameraPosition = const CameraPosition(target: LatLng(45.51563, -122.677433), zoom: 17);
+  LatLng _initialPosition = const LatLng(45.51563, -122.677433);
+
+
+  // Position currentDevicegps = Get.find<LocationController>().determinePosition();
+
 
   @override
   void initState() {
     super.initState();
-      /*
       // Establecemos el init state del map
-      _isLogged = Get.find<AuthController>().useLoggedIn();
-      if(_isLogged && Get.find<UserController>().userModel == null) {
+      //_isLogged = Get.find<AuthController>().useLoggedIn();
+      if(Get.find<UserController>().userModel == null) { // crear un funcion especifica para esto
         Get.find<UserController>().getUserInfo();
       }
       if(Get.find<LocationController>().addressList.isNotEmpty) {
+
+        // posicion de la camara en googlemaps
+        
         _cameraPosition = CameraPosition(target: LatLng(
+          double.parse(Get.find<LocationController>().getAddress['longitude']),
           double.parse(Get.find<LocationController>().getAddress['latitude']),
-          double.parse(Get.find<LocationController>().getAddress['longitude'])
         ));
 
+        // movemos la posicion inicial
+        print("Capturando la ifnormacion desde el dispositivo");
         _initialPosition = LatLng(
-          double.parse(Get.find<LocationController>().getAddress['latitude']),
-          double.parse(Get.find<LocationController>().getAddress['longitude'])
+          double.parse(Get.find<LocationController>().currentPosition.longitude.toString()),
+          double.parse(Get.find<LocationController>().currentPosition.latitude.toString()),
         );
       }
-    */
+    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Address Page"),
+          title: const Text("Address Page"),
           backgroundColor: AppColors.mainColor,
         ),
         body: GetBuilder<UserController>(builder: (userController) {
-          if(userController.userModel != null && _contactPersonName.text.isEmpty) {
+          if(userController.userModel != null && _contactPersonName.text.isEmpty && _contactPersonNumber.text.isEmpty) {            
+            Get.find<LocationController>().getAddressList();
+
             _contactPersonName.text = '${userController.userModel?.name}';
             _contactPersonNumber.text = '${userController.userModel?.phone}';
-            if(Get.find<LocationController>().addressList.isNotEmpty) {
-              _addressscontroller.text = Get.find<LocationController>().getUserAddress().address;
-            }
+
+
+            // if(Get.find<LocationController>().addressList.isNotEmpty) {
+            //   _addressscontroller.text = Get.find<LocationController>().getUserAddress().address;
+            // }
           }
           return GetBuilder<LocationController>(builder: (locationController) {
-            _addressscontroller.text =
-                '${locationController.placemark.name ?? ""}'
-                '${locationController.placemark.locality ?? ""}'
-                '${locationController.placemark.postalCode} ?? "'
-                '${locationController.placemark.country} ?? "';
 
-            _contactPersonName.text = "Matias";
-            _contactPersonNumber.text = "9 88834854";
+            // _addressscontroller.text =
+            //     '${locationController.placemark.name ?? ''}'
+            //     '${locationController.placemark.locality ?? ''}'
+            //     '${locationController.placemark.postalCode ?? ''}'
+            //     '${locationController.placemark.country ?? ''}';
+            _addressscontroller.text = locationController.addressList[0].address.toString();
 
-            print("address en my views is: " + _addressscontroller.text);
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -91,8 +103,8 @@ class _AddressPageState extends State<AddressPage> {
                     child: Stack(
                       children: [
                         GoogleMap(
-                            initialCameraPosition: CameraPosition(
-                            target: _initialPosition, zoom: 17),
+                            initialCameraPosition: CameraPosition(target: _initialPosition, zoom: 17),
+                            mapType: MapType.terrain,
                             zoomControlsEnabled: false,
                             compassEnabled: false,
                             indoorViewEnabled: true,
@@ -198,6 +210,7 @@ class _AddressPageState extends State<AddressPage> {
                 GestureDetector(
                   onTap: () {
                     AddressModel _addressModel = AddressModel(
+                      userid: 1,
                       addressType: locationController.addressTypeList[locationController.addressTypeIndex],
                       contactPersonName: _contactPersonName.text,
                       contactPersonNumber: _contactPersonNumber.text,

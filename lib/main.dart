@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controllers/auth_controlller.dart';
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
 import 'package:ecommerce_app/controllers/recomended_product_controller.dart';
 import 'package:ecommerce_app/routes/routers_helpers.dart';
@@ -13,17 +14,17 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     // No entiendo esta informacion
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecomendedProductController>().getRecomendedProductList();
-    
-    return GetMaterialApp(
+    Get.find<AuthController>().isAuthUser();
+
+    return GetMaterialApp(  
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      initialRoute: RouterHelper.getInitial(),
+      title: 'Ecommerce App',
+      initialRoute: RouterHelper.getInitial() ,
       getPages: RouterHelper.routes,
     );
   }

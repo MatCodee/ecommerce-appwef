@@ -18,16 +18,21 @@ class LocationRepo {
       '?lat=${latLng.latitude}&lng=${latLng.longitude}'
     );
   }
-  
+
+
+
   String getUserAddress() {
     return sharedPreferences.getString(AppContants.USER_ADDRESS) ?? "";
   }
   Future<Response> addAddress(AddressModel addressModel) async {
-    return await apiClient.postData(RoutesConstants.AddUserAddress, addressModel.toJson());
+    return await apiClient.postData(RoutesConstants.addUserAddress, addressModel.toJson());
   }
 
   Future<Response> getAllAddress() async {
-    return await apiClient.getData(RoutesConstants.AddressList);
+    return await apiClient.getData(RoutesConstants.userAddress);
   }
+
+  //Future<Response> updateAddress() {}
+  //Future<Response> createAddress() {}
 
 }

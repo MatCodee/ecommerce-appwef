@@ -5,7 +5,6 @@ import 'package:ecommerce_app/models/cart_model.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/service/repository/popular_products_repo.dart';
 import 'package:ecommerce_app/utils/color_custom.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class PopularProductController extends GetxController {
